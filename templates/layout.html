@@ -25,13 +25,11 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav flex-grow-1 justify-content-between">
-                        <li class="nav-item"><a class="nav-link" href="#" aria-label="Aperture"> <svg class="bi"
-                                    width="24" height="24" aria-hidden="true">
-                                    <use xlink:href="#aperture"></use>
-                                </svg> </a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html"><img src="/static/images/NearbyPlumbing.jpg" class="d-block mb-2" style="max-width: 60px;"></img></a></li>
                         <li class="nav-item"><a class="nav-link" href="#">New Construction</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Remodel</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Repair</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">The Team</a></li>
                     </ul>
                 </div>
@@ -53,6 +51,11 @@
             <!-- Main content column: centered on page -->
             <div class="col-12 col-md-9 col-lg-8">
                 <div class="content-center">
+                    <div class="container fluid" align="center">
+                        <img src="/static/images/NearbyPlumbing.jpg" class="d-inline mb-2" style="max-width: 500px;">
+                            <title>Logo</title>
+                        </img>
+                    </div>
                     {% block content %}{% endblock %}
                     {# keep backward-compatible block name if some templates use 'main' #}
                     {% block main %}{% endblock %}
