@@ -2,33 +2,34 @@
 
 {% block title %}Contact{% endblock %}
 
-{% block main %}
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul class="flashes" style="color: red;">
-        {% for message in messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-    {% endwith %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class="flashes" style="color: red;">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
 <p class="text-center">
-    We're glad to hear from you! Please send us a message using the form below, and we'll get back to you as soon as possible.
+    We're glad to hear from you! Please send us a message using the form below, and we'll get back to you as soon as
+    possible.
 </p>
-<form method="post" action="/contact" class="text-center"style="width: 50%; margin: 0 auto;" id="contact-form">
+<form method="post" action="/contact" class="mx-auto w-75 w-md-50" id="contact-form">
     <div class="mb-3">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name" required class="form-control">
     </div>
-    
+
     <div>
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required class="form-control">
     </div>
 
     <div>
         <label for="service">Service Requested</label>
-        <select id="service" name="service">
+        <select id="service" name="service" class="form-select">
             <option value="remodel">Remodel</option>
             <option value="construction">New Construction</option>
             <option value="repair">Repair or Replace</option>
@@ -38,7 +39,7 @@
 
     <div>
         <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
+        <textarea id="message" name="message" required class="form-control"></textarea>
     </div>
 
     <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">

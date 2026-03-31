@@ -1,0 +1,36 @@
+/* Site-wide styles: center content and style ad slots */
+
+/* Ensure body background and font smoothing aren't changed here if you have other styles */
+
+.content-center {
+    /* Optional inner max width for very wide screens */
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ad-slot {
+    background: #f8f9fa;
+    /* light gray */
+    border: 1px dashed #ddd;
+    padding: 1rem;
+    min-height: 200px;
+    /* placeholder height; adjust for real ad sizes */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* On medium screens we keep smaller ad height */
+@media (max-width: 991.98px) {
+    .ad-slot {
+        min-height: 150px;
+    }
+}
+
+/* Utility: add some breathing room when content is dense */
+.content-center>*+* {
+    margin-top: 1rem;
+}
