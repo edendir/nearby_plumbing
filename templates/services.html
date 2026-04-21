@@ -1,4 +1,74 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "layout.html" %} 
 
+{% block content %}
+<h1 class="mb-5 text-center">Our Services</h1>
+
+<div class="services-container">
+  {% for service in services %}
+  <div class="service-row mb-5 fade-in-scroll">
+    <div class="row align-items-center g-4">
+      {% if loop.index % 2 == 1 %}
+      <!-- Image on left, content on right -->
+      <div class="col-lg-6">
+        <img
+          src="/static/images/{{ service.image }}"
+          alt="{{ service.title }}"
+          class="img-fluid rounded shadow-sm"
+        />
+      </div>
+      <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-body">
+            <h2 class="card-title">{{ service.title }}</h2>
+            <p class="card-text">{{ service.description }}</p>
+            <a href="/contact" class="btn btn-primary">Get a Quote</a>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <!-- Content on left, image on right -->
+      <div class="col-lg-6 order-lg-2">
+        <img
+          src="/static/images/{{ service.image }}"
+          alt="{{ service.title }}"
+          class="img-fluid rounded shadow-sm"
+        />
+      </div>
+      <div class="col-lg-6 order-lg-1">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-body">
+            <h2 class="card-title">{{ service.title }}</h2>
+            <p class="card-text">{{ service.description }}</p>
+            <a href="/contact" class="btn btn-primary">Get a Quote</a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -100px 0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll(".fade-in-scroll").forEach((element) => {
+    observer.observe(element);
+  });
+</script>
 {% endblock %}

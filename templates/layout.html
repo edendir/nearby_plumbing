@@ -9,7 +9,6 @@
     <meta name="theme-color" content="#043c91ff">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -20,17 +19,13 @@
                 aria-controls="offcanvas" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
             </button>
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasLabel">Aperture</h5> <button type="button"
-                        class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav flex-grow-1 justify-content-between">
                         <li class="nav-item"><a class="nav-link" href="/"><img src="/static/images/nearby_logo.jpg" class="d-block mb-2" style="max-width: 60px;"></img></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Special Offers</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="team">The Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('services') }}">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('offers') }}">Special Offers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="/team">The Team</a></?li> -->
                     </ul>
                 </div>
             </div>
@@ -102,7 +97,7 @@
         </div>
     </footer>
 
-    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script> -->
 
     {% block scripts %}{% endblock %}
 </body>

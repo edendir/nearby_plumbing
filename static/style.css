@@ -3,34 +3,61 @@
 /* Ensure body background and font smoothing aren't changed here if you have other styles */
 
 .content-center {
-    /* Optional inner max width for very wide screens */
-    max-width: 760px;
-    margin-left: auto;
-    margin-right: auto;
+  /* Optional inner max width for very wide screens */
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .ad-slot {
-    background: #f8f9fa;
-    /* light gray */
-    border: 1px dashed #ddd;
-    padding: 1rem;
-    min-height: 200px;
-    /* placeholder height; adjust for real ad sizes */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #6c757d;
-    font-size: 0.9rem;
+  background: #f8f9fa;
+  /* light gray */
+  border: 1px dashed #ddd;
+  padding: 1rem;
+  min-height: 200px;
+  /* placeholder height; adjust for real ad sizes */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  font-size: 0.9rem;
 }
 
 /* On medium screens we keep smaller ad height */
 @media (max-width: 991.98px) {
-    .ad-slot {
-        min-height: 150px;
-    }
+  .ad-slot {
+    min-height: 150px;
+  }
 }
 
 /* Utility: add some breathing room when content is dense */
-.content-center>*+* {
-    margin-top: 1rem;
+.content-center > * + * {
+  margin-top: 1rem;
+}
+
+/* Fade-in on scroll animation */
+.fade-in-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.fade-in-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Fade-in on scroll animation */
+.fade-in-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.fade-in-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
