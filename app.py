@@ -59,6 +59,11 @@ SERVICES_DATA = [
         "description": "Complete plumbing installation for new residential construction projects.",
         "image": "res_new_const.jpg",
     },
+    {
+        "title": "Residential Remodeling",
+        "description": "Complete plumbing installation for residential remodeling projects.",
+        "image": "res_rem.jpg",
+    },
 ]
 
 
