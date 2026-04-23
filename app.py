@@ -1,6 +1,6 @@
 from email.mime import message
 import os
-
+from config import Config
 from sendgrid.helpers import mail
 import yaml
 from flask import Flask, flash, redirect, render_template, request
@@ -19,7 +19,7 @@ except Exception as e:
     print(f"Warning: Error loading .env.yaml: {e}")
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+app.config.from_object(Config)
 
 SERVICES_DATA = [
     {
@@ -88,15 +88,15 @@ Message:
 """
 
     msg = Mail(
-        from_email=os.getenv("MAIL_FROM"),
-        to_emails=os.getenv("MAIL_TO"),
+        from_email=app.config["MAIL_FROM"],
+        to_emails=app.config["MAIL_TO"],
         subject="New Contact Form Submission",
         plain_text_content=content,
     )
 
-    sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY"))
-    print("FROM:", os.getenv("MAIL_FROM"))
-    print("TO:", os.getenv("MAIL_TO"))
+    sg = SendGridAPIClient(app.config["SENDGRID_API_KEY"])
+    print("FROM:", app.config["MAIL_FROM"])
+    print("TO:", app.config["MAIL_TO"])
     print("NAME:", name)
     print("EMAIL:", email)
     print("MESSAGE:", content)
