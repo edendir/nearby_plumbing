@@ -42,10 +42,10 @@
         <textarea id="message" name="message" required class="form-control"></textarea>
     </div>
 
-    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
-    <button type="button" class="btn btn-primary">Send</button>
+    <!-- <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response"> -->
+    <button type="submit" class="btn btn-primary">Send</button>
 </form>
-<script>const RECAPTCHA_SITE_KEY = "{{ site_key }}";</script>
-<script src="https://www.google.com/recaptcha/api.js?render={{ site_key}}" defer></script>
-<script src="/static/verify-captcha.js" defer></script>
+<!-- <script>const RECAPTCHA_SITE_KEY = "{{ site_key }}";</script> -->
+<!-- <script src="https://www.google.com/recaptcha/api.js?render={{ site_key}}" defer></script> -->
+<!-- <script src="/static/verify-captcha.js" defer></script> -->
 {% endblock %}

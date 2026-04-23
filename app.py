@@ -1,9 +1,11 @@
+from email.mime import message
 import os
-import smtplib
-from email.message import EmailMessage
 
+from sendgrid.helpers import mail
 import yaml
-from flask import Flask, render_template, request
+from flask import Flask, flash, redirect, render_template, request
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 # Load environment variables from .env.yaml
 try:
@@ -17,6 +19,7 @@ except Exception as e:
     print(f"Warning: Error loading .env.yaml: {e}")
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
 SERVICES_DATA = [
     {
@@ -72,6 +75,34 @@ def home():
     return render_template("index.html")
 
 
+def send_contact_email(name, email, content, service):
+    content = f"""
+New contact form submission
+
+Name: {name}
+Email: {email}
+Service: {service}
+
+Message:
+{content}
+"""
+
+    msg = Mail(
+        from_email=os.getenv("MAIL_FROM"),
+        to_emails=os.getenv("MAIL_TO"),
+        subject="New Contact Form Submission",
+        plain_text_content=content,
+    )
+
+    sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY"))
+    print("FROM:", os.getenv("MAIL_FROM"))
+    print("TO:", os.getenv("MAIL_TO"))
+    print("NAME:", name)
+    print("EMAIL:", email)
+    print("MESSAGE:", content)
+    sg.send(msg)
+
+
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
@@ -80,46 +111,18 @@ def contact():
         service = request.form.get("service")
         message = request.form.get("message")
 
-        msg = EmailMessage()
-        msg["Subject"] = f"New Contact Form Submission from {name}"
-        msg["From"] = os.getenv("MAIL_FROM")
-        msg["To"] = os.getenv("MAIL_USERNAME")
-        msg["Reply-To"] = email
-
-        msg.set_content(
-            f"""
-                        New Service Request
-                        Name: {name}
-                        Email: {email}
-                        Service: {service}
-                        Message: {message}
-                        """
-        )
-
-        confirm = EmailMessage()
-        confirm["Subject"] = "We've received your request"
-        confirm["From"] = os.getenv("MAIL_FROM")
-        confirm["To"] = email
-        confirm.set_content(
-            f"""
-                            Thank you for your submission, {name}!
-                            We have received your request and will get back to you soon.
-
-                            -The Nearby Plumbing Team
-                            """
-        )
+        if not name or not email or not message:
+            flash("All fields required")
+            return redirect("/#contact")
 
         try:
-            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-                smtp.login(os.getenv("MAIL_USERNAME"), os.getenv("MAIL_PASSWORD"))
-                smtp.send_message(msg)
-                smtp.send_message(confirm)
-            return render_template("contact.html", success=True)
+            send_contact_email(name, email, message, service)
+            flash("Message sent successfully!")
+            return redirect("/contact")
         except Exception as e:
-            print(f"Email sending failed: {e}")
-            return render_template(
-                "contact.html", error="Failed to send email. Please try again."
-            )
+            print(e)
+            flash("Error sending message. Please try again.")
+            return redirect("/contact")
     else:
         return render_template("contact.html")
 
