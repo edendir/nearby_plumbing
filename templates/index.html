@@ -1,43 +1,142 @@
-{% extends "layout.html" %}
-
-{% block title %}Home | Nearby Plumbing{% endblock %}
-
-{% block content %}
-   <!-- <h1 class="text-center">Welcome to Nearby Plumbing!</h1>
+{% extends "layout.html" %} {% block title %}Home | Nearby Plumbing{% endblock
+%} {% block content %}
+<!-- <h1 class="text-center">Welcome to Nearby Plumbing!</h1>
    <h3 class="text-center">Your trusted local plumbing experts, serving our community with quality workmanship and exceptional customer service.</h3></p>Whether you need a quick repair, a remodel, or new construction plumbing, we're here to help. Contact us today for all your plumbing needs!</p>
     -->
-   <section id="hero" class="bg-gray-900 text-black py-20 px-6 text-center">
-      <div>
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Reliable Plumbing in St. Francis, MN</h1>
-        <p class="text-lg mb-6">Nearby Plumbing is a local, veteran, family owned business servicing St. Francis and the surrounding communities. Focused on providing high quality professional plumbing services and delivering exceptional customer experiences. With nearly a decade of experience in the industry, ranging from residential to commercial, there's no job too big or too small. Call Nearby Plumbing today for all your plumbing needs!</p>
+<section id="hero" class="bg-gray-900 text-black py-20 px-6 text-center">
+  <div>
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">
+      Reliable Plumbing in St. Francis, MN
+    </h1>
+    <p class="text-lg mb-6">
+      Local, veteran-owned plumber serving St. Francis and the surrounding communities.
+      <br class="hidden md:block">
+      High-quality work, fast response times, and nearly a decade of service you can rely on.
+    </p>
+  </div>
+  <div class="flex justify-center gap-4">
+    <a href="tel:9529059544" class="btn btn-primary btn-lg">Call Now!</a>
+    <a href="contact" class="btn btn-outline-primary btn-lg">Request Service</a>
+  </div>
+</section>
+<section class="py-5 px-3 bg-light position-relative">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <!-- Left content -->
+      <div class="col-md-6">
+        <h2 class="h3 fw-bold mb-3">Request Service Today</h2>
+        <p class="mb-3">
+          Fast response. Honest pricing. Local service you can trust.
+        </p>
+        <p class="fw-semibold">
+          Or call now: <a href="tel:9529059544">(952) 905-9544</a>
+        </p>
       </div>
-      <div class="flex justify-center gap-4">
-         <a href="tel:9529059544" class="btn btn-primary btn-lg">Call Now</a>
-         <a href="contact" class="btn btn-outline-primary btn-lg">Request Service</a>
-      </div>
-   </section>
-    <!-- <section id="services" class="py-16 px-6 bg-gray-50">
-    <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
-      <div>
-        <h3 class="font-semibold text-lg mb-2">Repairs</h3>
-        <p>Leaks, pipes, and everyday plumbing problems handled quickly.</p>
-      </div>
-      <div>
-        <h3 class="font-semibold text-lg mb-2">Drain Cleaning</h3>
-        <p>Clogs cleared safely without damaging your system.</p>
-      </div>
-      <div>
-        <h3 class="font-semibold text-lg mb-2">Water Heaters</h3>
-        <p>Repair or replacement for reliable hot water year-round.</p>
-      </div>
-      <div>
-        <h3 class="font-semibold text-lg mb-2">Installations</h3>
-        <p>Fixtures and upgrades done cleanly and efficiently.</p>
-      </div>
-      <div>
-        <h3 class="font-semibold text-lg mb-2">Emergency Service</h3>
-        <p>Fast response when problems can’t wait.</p>
+
+      <!-- Right form (card) -->
+      <div class="col-md-6 d-flex justify-content-end">
+        <div
+          class="card shadow-sm p-4"
+          style="max-width: 420px"
+        >
+          <form>
+            <div class="mb-3">
+              <input type="text" placeholder="Name" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <input type="tel" placeholder="Phone" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <input type="email" placeholder="Email" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <textarea
+                placeholder="What do you need help with?"
+                class="form-control"
+                rows="3"
+              ></textarea>
+            </div>
+            <button class="btn btn-primary w-100">Request Service</button>
+          </form>
+        </div>
       </div>
     </div>
-  </section> -->
+  </div>
+</section>
+<section id="services" class="py-16 px-6 bg-gray-50">
+  <div class="services-container">
+    {% for service in services %}
+      <div class="service-row mb-5 fade-in-scroll">
+        <div class="row align-items-center g-4">
+          {% if loop.index % 2 == 1 %}
+          <!-- Image on left, content on right -->
+          <div class="col-lg-6">
+            <img
+              src="/static/images/{{ service.image }}"
+              alt="{{ service.title }}"
+              class="img-fluid rounded shadow-sm"
+            />
+          </div>
+          <div class="col-lg-6">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body">
+                <h2 class="card-title">{{ service.title }}</h2>
+                <p class="card-text">{{ service.short_description }}</p>
+                <a href="/contact" class="btn btn-primary">Get a Quote</a>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <!-- Content on left, image on right -->
+          <div class="col-lg-6 order-lg-2">
+            <img
+              src="/static/images/{{ service.image }}"
+              alt="{{ service.title }}"
+              class="img-fluid rounded shadow-sm"
+            />
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body">
+                <h2 class="card-title">{{ service.title }}</h2>
+                <p class="card-text">{{ service.short_description }}</p>
+                <a href="/contact" class="btn btn-primary">Get a Quote</a>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+<section class="py-12 px-6">
+  <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <div>Licensed & Insured</div>
+    <div>Veteran Owned</div>
+    <div>Local & Family Operated</div>
+    <div>Fast Response</div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -100px 0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll(".fade-in-scroll").forEach((element) => {
+    observer.observe(element);
+  });
+</script>
 {% endblock %}
