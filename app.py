@@ -5,9 +5,9 @@ from sendgrid.helpers.mail import Mail
 
 app = Flask(__name__)
 app.config.from_object(Config)
-print("Loaded configuration:")
-for key, value in app.config.items():
-    print(f"  {key}: {value}")
+# print("Loaded configuration:")
+# for key, value in app.config.items():
+#     print(f"  {key}: {value}")
 
 SERVICES_DATA = [
     {
