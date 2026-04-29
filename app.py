@@ -7,19 +7,11 @@ from flask import Flask, flash, redirect, render_template, request
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
-# Load environment variables from .env.yaml
-try:
-    with open(".env.yaml", "r") as f:
-        env_vars = yaml.safe_load(f)
-        for key, value in env_vars.items():
-            os.environ[key] = str(value)
-except FileNotFoundError:
-    print("Warning: .env.yaml file not found")
-except Exception as e:
-    print(f"Warning: Error loading .env.yaml: {e}")
-
 app = Flask(__name__)
 app.config.from_object(Config)
+print("Loaded configuration:")
+for key, value in app.config.items():
+    print(f"  {key}: {value}")
 
 SERVICES_DATA = [
     {

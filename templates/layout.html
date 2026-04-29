@@ -14,7 +14,7 @@
 
 <body id="top">
     <nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
-        <div class="container"> <a class="navbar-brand d-md-none" href="index.html"> <img src="/static/images/nearby_logo.jpg" class="d-block mb-2" style="max-width: 40px;"></img>
+        <div class="container"> <a class="navbar-brand d-md-none" href="/"> <img src="/static/images/nearby_logo.jpg" class="d-block mb-2" style="max-width: 40px;"></img>
             </a> <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"
                 aria-controls="offcanvas" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
             </button>
@@ -46,10 +46,8 @@
             <!-- Main content column: centered on page -->
             <div class="col-12 col-md-9 col-lg-8">
                 <div class="content-center">
-                    <div class="container fluid" align="center">
-                        <img src="/static/images/nearby_logo.jpg" class="d-inline mb-2" style="max-width: 500px;">
-                            <title>Logo</title>
-                        </img>
+                    <div class="d-flex justify-content-center">
+                        <img src="/static/images/nearby_logo.jpg" class="img-fluid" style="max-width: 500px;" alt="Logo">
                     </div>
                     {% block content %}{% endblock %}
                     {# keep backward-compatible block name if some templates use 'main' #}
